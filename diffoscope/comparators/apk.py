@@ -36,7 +36,7 @@ class ApkContainer(Archive):
     @tool_required('apktool')
     def open_archive(self):
         self._members = []
-        self._unpacked = os.path.join(get_temporary_directory().name, self.source.name)
+        self._unpacked = os.path.join(get_temporary_directory().name, self.source.name[:-4])
         logger.debug("extracting %s to %s", self.source.name, self._unpacked)
         subprocess.check_call(['apktool', 'd', '-k', '-m', '-o', self._unpacked, self.source.path],
             shell=False, stderr=None, stdout=subprocess.PIPE)
